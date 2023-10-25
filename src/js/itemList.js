@@ -51,9 +51,7 @@ $(function () {
     $(".category-button").removeClass("selected");
     $("#" + category).addClass("selected");
 
-    fetch(
-      `https://fififaye.github.io/SAZAFASHIONSHOP/src/data/${category}.json`
-    )
+    fetch(`//fififaye.github.io/SAZAFASHIONSHOP/src/data/${category}.json`)
       .then((response) => response.json()) //json을 객체로 변환
       .then((responseObejct) => {
         //객체로 출력
