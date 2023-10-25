@@ -1,6 +1,5 @@
 import { spinner, hideSpinner } from "./loading.js";
 $(function () {
-
   //금액 포멧
   function formatKRW(n) {
     return new Intl.NumberFormat("ko-KR", {
@@ -52,7 +51,9 @@ $(function () {
     $(".category-button").removeClass("selected");
     $("#" + category).addClass("selected");
 
-    fetch(`/src/data/${category}.json`)
+    fetch(
+      `https://fififaye.github.io/SAZAFASHIONSHOP/src/data/${category}.json`
+    )
       .then((response) => response.json()) //json을 객체로 변환
       .then((responseObejct) => {
         //객체로 출력
@@ -67,7 +68,9 @@ $(function () {
             <i class="fa fa-heart"></i>
             <a href="itemSpec.html?category=${category}&itemId=${item.id}">
               <div class="itemImage">
-                <img src="${productImg}" alt="" class="listPage_Image" id="${item.id}">
+                <img src="${productImg}" alt="" class="listPage_Image" id="${
+            item.id
+          }">
               </div>
               <div class="listPage_detail">
                 <div class="listPage_title">${title}</div>
@@ -120,20 +123,32 @@ $(function () {
   //찜한 상품 핑크 하트 추가 및 sidebar에서 찜한 상품 사진 보여주기
   $(document).on("click", ".fa-heart", function (e) {
     $(e.target).toggleClass("red");
-    let likeImg = $(e.target).siblings("a").find(".itemImage").find("img").attr("src");
-    let likeItemId = $(e.target).siblings("a").find(".itemImage").find("img").attr("id");
+    let likeImg = $(e.target)
+      .siblings("a")
+      .find(".itemImage")
+      .find("img")
+      .attr("src");
+    let likeItemId = $(e.target)
+      .siblings("a")
+      .find(".itemImage")
+      .find("img")
+      .attr("id");
     let colorVal = $(e.target).css("Color");
-    console.log(colorVal, likeItemId)
+    console.log(colorVal, likeItemId);
     if (colorVal == "rgb(255, 105, 180)") {
       //alert("heart")
-      $(".wishListArea").prepend(`<img src="${likeImg}" class="likeBtn-img" id="${likeItemId}" /> <br/>`)
+      $(".wishListArea").prepend(
+        `<img src="${likeImg}" class="likeBtn-img" id="${likeItemId}" /> <br/>`
+      );
     } else {
-      $(".wishListArea").find("#" + likeItemId).remove();
+      $(".wishListArea")
+        .find("#" + likeItemId)
+        .remove();
     }
   });
   //sidebar 토클클래스 사용
   $("#likeBtn").click(function (e) {
-    $(".wishListArea").toggleClass("likeToggle")
+    $(".wishListArea").toggleClass("likeToggle");
     $(e.target).toggleClass("darkgray");
-  })
+  });
 });
