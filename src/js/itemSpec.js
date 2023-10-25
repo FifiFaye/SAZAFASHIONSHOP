@@ -1,6 +1,4 @@
 $(function () {
-
-
   //1019추가 로그인 상태 페이지 이동
   function renderHeader() {
     const authenticated = localStorage.getItem("auth");
@@ -38,7 +36,9 @@ $(function () {
 
   //상세 페이지
   function showItemSpec() {
-    fetch(`/src/data/${category}.json`)
+    fetch(
+      `https://fififaye.github.io/SAZAFASHIONSHOP/src/data/${category}.json`
+    )
       .then((response) => response.json()) //json을 객체로 변환
       .then((responseObejct) => {
         //객체로 출력
